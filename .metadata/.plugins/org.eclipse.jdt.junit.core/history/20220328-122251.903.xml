@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="MathValidatorTest" project="dk.sdu.mmmi.mdsd.tests" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="dk.sdu.mmmi.mdsd.tests.MathValidatorTest" time="0.146" displayname="MathValidatorTest" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathValidatorTest]">
-    <testcase name="noRepeatedGlobalVarDeclaration" classname="dk.sdu.mmmi.mdsd.tests.MathValidatorTest" time="0.146" displayname="noRepeatedGlobalVarDeclaration()" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathValidatorTest]/[method:noRepeatedGlobalVarDeclaration()]"/>
-  </testsuite>
-</testrun>

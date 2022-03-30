@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="MathExampleTest" project="dk.sdu.mmmi.mdsd.tests" tests="3" started="3" failures="0" errors="0" ignored="0">
-  <testsuite name="dk.sdu.mmmi.mdsd.tests.MathExampleTest" time="0.234" displayname="MathExampleTest" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathExampleTest]">
-    <testcase name="mathematicalOperations" classname="dk.sdu.mmmi.mdsd.tests.MathExampleTest" time="0.171" displayname="mathematicalOperations()" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathExampleTest]/[method:mathematicalOperations()]"/>
-    <testcase name="evilExample" classname="dk.sdu.mmmi.mdsd.tests.MathExampleTest" time="0.045" displayname="evilExample()" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathExampleTest]/[method:evilExample()]"/>
-    <testcase name="letAndScope" classname="dk.sdu.mmmi.mdsd.tests.MathExampleTest" time="0.011" displayname="letAndScope()" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathExampleTest]/[method:letAndScope()]"/>
-  </testsuite>
-</testrun>

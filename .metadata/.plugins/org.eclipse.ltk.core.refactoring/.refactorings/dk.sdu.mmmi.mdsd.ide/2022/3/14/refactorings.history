@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring accessors="true" comment="Delete 2 elements from project &apos;dk.sdu.mmmi.mdsd.ide&apos;&#x0A;- Original project: &apos;dk.sdu.mmmi.mdsd.ide&apos;&#x0A;- Original elements:&#x0A;     dk.sdu.mmmi.mdsd.ide.MathIdeModule.java&#x0A;     dk.sdu.mmmi.mdsd.ide.MathIdeSetup.java" description="Delete elements" element1="/src&lt;dk.sdu.mmmi.mdsd.ide{MathIdeModule.java" element2="/src&lt;dk.sdu.mmmi.mdsd.ide{MathIdeSetup.java" elements="2" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1648376639592" subPackages="false" version="1.0"/>
-</session>
