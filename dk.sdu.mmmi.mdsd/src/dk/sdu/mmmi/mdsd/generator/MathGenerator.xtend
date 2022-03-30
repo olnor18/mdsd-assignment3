@@ -30,18 +30,10 @@ class MathGenerator extends AbstractGenerator {
 		val math = resource.allContents.filter(Math)
 		if (math.hasNext){
 			val mathObj = math.next
-			mathObj.lines.forEach[line|
-				line.compute
-			]
-			variables.displayPanel
+			mathObj.compute.displayPanel
 		}
 	}
-	
-	//
-	// Compute function: computes value of expression
-	// Note: written according to illegal left-recursive grammar, requires fix
-	//
-	
+
 	def static compute(Math math) { 
 		variables = new HashMap();
 		linesToBeProcessed=new ArrayList(math.lines)
@@ -96,17 +88,14 @@ class MathGenerator extends AbstractGenerator {
 		}
 	}
 	
-	/*def static int computePrim(Number factor) SS{ 
-		87
-	}*/
-
 	def void displayPanel(Map<String, Integer> result) {
 		var resultString = ""
 		for (entry : result.entrySet()) {
          	resultString += "var " + entry.getKey() + " = " + entry.getValue() + "\n"
         }
+        println()
 		
-		//JOptionPane.showMessageDialog(null, resultString ,"Math Language", JOptionPane.INFORMATION_MESSAGE)
+		JOptionPane.showMessageDialog(null, resultString ,"Math Language", JOptionPane.INFORMATION_MESSAGE)
 	}
 
 }

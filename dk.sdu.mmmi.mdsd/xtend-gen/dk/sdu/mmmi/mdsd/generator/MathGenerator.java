@@ -20,12 +20,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
+import javax.swing.JOptionPane;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 
 /**
  * Generates code from your model files on save.
@@ -44,11 +46,7 @@ public class MathGenerator extends AbstractGenerator {
     boolean _hasNext = math.hasNext();
     if (_hasNext) {
       final dk.sdu.mmmi.mdsd.math.Math mathObj = math.next();
-      final Consumer<MathExp> _function = (MathExp line) -> {
-        MathGenerator.compute(line);
-      };
-      mathObj.getLines().forEach(_function);
-      this.displayPanel(MathGenerator.variables);
+      this.displayPanel(MathGenerator.compute(mathObj));
     }
   }
   
@@ -180,11 +178,6 @@ public class MathGenerator extends AbstractGenerator {
     }
   }
   
-  /**
-   * def static int computePrim(Number factor) SS{
-   * 87
-   * }
-   */
   public void displayPanel(final Map<String, Integer> result) {
     String resultString = "";
     Set<Map.Entry<String, Integer>> _entrySet = result.entrySet();
@@ -198,5 +191,7 @@ public class MathGenerator extends AbstractGenerator {
       String _plus_3 = (_plus_2 + "\n");
       resultString = (_resultString + _plus_3);
     }
+    InputOutput.println();
+    JOptionPane.showMessageDialog(null, resultString, "Math Language", JOptionPane.INFORMATION_MESSAGE);
   }
 }
