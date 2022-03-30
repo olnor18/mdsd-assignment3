@@ -1,0 +1,101 @@
+grammar dk.sdu.mmmi.mdsd.Math with org.eclipse.xtext.common.Terminals
+
+generate math "http://www.sdu.dk/mmmi/mdsd/Math"
+
+Math:
+	lines += MathExp+	
+;
+
+MathExp:
+	'var' value=Assignment
+;
+
+Assignment returns Variable:
+	name=ID '=' exp=Exp
+;
+
+Exp returns Expression:
+	SubtractionExp
+;
+//Reverse PMDAS
+SubtractionExp returns Expression:
+	AdditionExp ('-' {Subtraction .left=current} right=AdditionExp)*
+;
+
+AdditionExp returns Expression:
+	DivisionExp ('+' {Addition.left=current} right=DivisionExp)*
+;
+
+DivisionExp returns Expression:
+	MultiplicationExp ('/' {Division.left=current} right=MultiplicationExp)*
+;
+
+MultiplicationExp returns Expression:
+	Primary ('*' {Multiplication.left=current} right=Primary)*
+;
+
+Primary returns Expression:
+	Number | Parenthesis | VariableUse | Let
+;
+
+Parenthesis returns Expression:
+	'(' SubtractionExp ')'
+;
+
+Number returns Expression:
+	{Number} value=INT
+;
+
+VariableUse returns Expression:
+	{Var} ref = [Variable]
+;
+
+Let returns Variable:
+	{Let} 'let' name=ID '=' assigment=Primary 'in' exp=Exp 'end'
+;
+
+
+
+
+/*
+Math:
+	lines += MathExp+	
+;
+
+MathExp:
+	'var' name=ID '=' exp=Exp
+;
+
+Exp returns Expression:
+	left=Primary (operator=ExpOp right=Exp)?
+;
+
+ExpOp returns Expression:
+	{Plus} '+' | {Minus} '-' | {Mult} '*' | {Div} '/'	
+;
+
+Primary returns Expression:
+	Number | Parenthesis | VariableUse | Let | LetUse
+;
+
+Parenthesis returns Expression:
+	'(' Exp ')'
+;
+
+Number returns Expression:
+	value=INT
+;
+
+VariableUse returns Expression:
+	ref = [MathExp]
+;
+
+
+Let:
+	'let' name=ID '=' assigment=Primary 'in' exp=Exp 'end'
+;
+
+LetUse returns Expression:
+	ref = [Let]
+;*/
+

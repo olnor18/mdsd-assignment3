@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun referenceSingleVar()" project="dk.sdu.mmmi.mdsd.tests" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="dk.sdu.mmmi.mdsd.tests.MathParsingTest" time="0.141" displayname="MathParsingTest" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathParsingTest]">
+    <testcase name="referenceSingleVar" classname="dk.sdu.mmmi.mdsd.tests.MathParsingTest" time="0.141" displayname="referenceSingleVar()" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathParsingTest]/[method:referenceSingleVar()]"/>
+  </testsuite>
+</testrun>

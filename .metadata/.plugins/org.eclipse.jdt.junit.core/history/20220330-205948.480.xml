@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="MathScopeTest" project="dk.sdu.mmmi.mdsd.tests" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="dk.sdu.mmmi.mdsd.tests.MathScopeTest" time="0.187" displayname="MathScopeTest" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathScopeTest]">
+    <testcase name="referenceCurrentVar" classname="dk.sdu.mmmi.mdsd.tests.MathScopeTest" time="0.152" displayname="referenceCurrentVar()" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathScopeTest]/[method:referenceCurrentVar()]"/>
+    <testcase name="forwardReferenceLetError" classname="dk.sdu.mmmi.mdsd.tests.MathScopeTest" time="0.014" displayname="forwardReferenceLetError()" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathScopeTest]/[method:forwardReferenceLetError()]"/>
+    <testcase name="referenceOutsideLetError" classname="dk.sdu.mmmi.mdsd.tests.MathScopeTest" time="0.007" displayname="referenceOutsideLetError()" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathScopeTest]/[method:referenceOutsideLetError()]"/>
+    <testcase name="referenceCurrentVarInLet" classname="dk.sdu.mmmi.mdsd.tests.MathScopeTest" time="0.004" displayname="referenceCurrentVarInLet()" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathScopeTest]/[method:referenceCurrentVarInLet()]"/>
+    <testcase name="referenceNoVariable" classname="dk.sdu.mmmi.mdsd.tests.MathScopeTest" time="0.005" displayname="referenceNoVariable()" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathScopeTest]/[method:referenceNoVariable()]"/>
+  </testsuite>
+</testrun>

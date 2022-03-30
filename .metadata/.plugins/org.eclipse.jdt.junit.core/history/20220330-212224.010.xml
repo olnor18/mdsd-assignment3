@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun nestedLet()" project="dk.sdu.mmmi.mdsd.tests" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="dk.sdu.mmmi.mdsd.tests.MathParsingTest" time="0.137" displayname="MathParsingTest" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathParsingTest]">
+    <testcase name="nestedLet" classname="dk.sdu.mmmi.mdsd.tests.MathParsingTest" time="0.137" displayname="nestedLet()" uniqueid="[engine:junit-jupiter]/[class:dk.sdu.mmmi.mdsd.tests.MathParsingTest]/[method:nestedLet()]"/>
+  </testsuite>
+</testrun>
