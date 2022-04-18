@@ -33,6 +33,15 @@ public interface MathFactory extends EFactory
   Math createMath();
 
   /**
+   * Returns a new object of class '<em>External</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>External</em>'.
+   * @generated
+   */
+  External createExternal();
+
+  /**
    * Returns a new object of class '<em>Exp</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -103,6 +112,24 @@ public interface MathFactory extends EFactory
    * @generated
    */
   Multiplication createMultiplication();
+
+  /**
+   * Returns a new object of class '<em>Parenthesis</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parenthesis</em>'.
+   * @generated
+   */
+  Parenthesis createParenthesis();
+
+  /**
+   * Returns a new object of class '<em>External Use</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>External Use</em>'.
+   * @generated
+   */
+  ExternalUse createExternalUse();
 
   /**
    * Returns a new object of class '<em>Number</em>'.

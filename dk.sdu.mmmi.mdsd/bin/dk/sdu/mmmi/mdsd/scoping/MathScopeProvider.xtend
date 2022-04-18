@@ -12,6 +12,7 @@ import org.eclipse.xtext.EcoreUtil2
 import dk.sdu.mmmi.mdsd.math.Let
 import java.util.List
 import dk.sdu.mmmi.mdsd.math.Assignment
+import dk.sdu.mmmi.mdsd.math.VarUse
 
 /**
  * This class contains custom scoping description.
@@ -28,22 +29,31 @@ class MathScopeProvider extends AbstractMathScopeProvider {
 		        val List<Assignment> candidates = EcoreUtil2.getAllContentsOfType(rootElement, Assignment)
 		        val List<Assignment> validCandidates = candidates.filter(a | a.eContainer instanceof MathExp).filter(a | a.eContainer !== EcoreUtil2.getContainerOfType(context, MathExp)).toList();
 
-        		val let = EcoreUtil2.getContainerOfType(context, Let)
-        		if (let !== null){
-					validCandidates.addLets(let, candidates)
-        		}
+        		var let = EcoreUtil2.getContainerOfType(context, Let)
         		
+        		//TODO: Fix that var y = let x = x + 1 in x * 2 end doesn't allow x+1 to reference let x whilst shadowing var x. Use test26 as example
+        		if (let !== null && EcoreUtil2.getAllContentsOfType(let.value.exp, VarUse).filter(varuse | varuse === context).toList().size > 0){
+        			let = EcoreUtil2.getContainerOfType(let.eContainer, Let)
+        		}
+        		if (let !== null){
+					validCandidates.addLets(context, let, candidates)
+        		}
         		return Scopes.scopeFor(validCandidates);
         	}
         	
             return scope;
         }
+
 		
-		def void addLets(List<Assignment> validCandidates, Let let, List<Assignment> candidates){
-			validCandidates.add(candidates.findFirst(a | a.eContainer === let))
-    		val newLet = EcoreUtil2.getContainerOfType(let.eContainer, Let)
+		def void addLets(List<Assignment> validCandidates, EObject context, Let let, List<Assignment> candidates){
+			if (validCandidates.filter(a | a.name === let.value.name && a.eContainer instanceof Let).size == 0) {
+				validCandidates.add(candidates.findFirst(a | a.eContainer === let))
+				val shadowedMathExp = validCandidates.filter(a | a.eContainer instanceof MathExp).findFirst(a | a.name == let.value.name)
+				validCandidates.remove(shadowedMathExp)
+			}
+			val newLet = EcoreUtil2.getContainerOfType(let.eContainer, Let)
     		if (newLet !== null){
-				validCandidates.addLets(newLet, candidates)
+				validCandidates.addLets(context, newLet, candidates)
     		}
 		}
 }

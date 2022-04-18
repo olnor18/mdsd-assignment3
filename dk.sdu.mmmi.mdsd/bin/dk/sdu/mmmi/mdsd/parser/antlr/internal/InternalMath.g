@@ -76,24 +76,158 @@ ruleMath returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		otherlv_0='program'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getMathAccess().getProgramKeyword_0());
+		}
 		(
-			{
-				newCompositeNode(grammarAccess.getMathAccess().getLinesMathExpParserRuleCall_0());
-			}
-			lv_lines_0_0=ruleMathExp
-			{
-				if ($current==null) {
-					$current = createModelElementForParent(grammarAccess.getMathRule());
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getMathAccess().getNameIDTerminalRuleCall_1_0());
 				}
-				add(
-					$current,
-					"lines",
-					lv_lines_0_0,
-					"dk.sdu.mmmi.mdsd.Math.MathExp");
-				afterParserOrEnumRuleCall();
-			}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getMathRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
 		)
-	)+
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getMathAccess().getExternalsExternalParserRuleCall_2_0());
+				}
+				lv_externals_2_0=ruleExternal
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getMathRule());
+					}
+					add(
+						$current,
+						"externals",
+						lv_externals_2_0,
+						"dk.sdu.mmmi.mdsd.Math.External");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getMathAccess().getLinesMathExpParserRuleCall_3_0());
+				}
+				lv_lines_3_0=ruleMathExp
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getMathRule());
+					}
+					add(
+						$current,
+						"lines",
+						lv_lines_3_0,
+						"dk.sdu.mmmi.mdsd.Math.MathExp");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)+
+	)
+;
+
+// Entry rule entryRuleExternal
+entryRuleExternal returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getExternalRule()); }
+	iv_ruleExternal=ruleExternal
+	{ $current=$iv_ruleExternal.current; }
+	EOF;
+
+// Rule External
+ruleExternal returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='external'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getExternalAccess().getExternalKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getExternalAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getExternalRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_2='('
+		{
+			newLeafNode(otherlv_2, grammarAccess.getExternalAccess().getLeftParenthesisKeyword_2());
+		}
+		(
+			(
+				lv_argsType_3_0=RULE_ID
+				{
+					newLeafNode(lv_argsType_3_0, grammarAccess.getExternalAccess().getArgsTypeIDTerminalRuleCall_3_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getExternalRule());
+					}
+					addWithLastConsumed(
+						$current,
+						"argsType",
+						lv_argsType_3_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)?
+		(
+			otherlv_4=','
+			{
+				newLeafNode(otherlv_4, grammarAccess.getExternalAccess().getCommaKeyword_4_0());
+			}
+			(
+				(
+					lv_argsType_5_0=RULE_ID
+					{
+						newLeafNode(lv_argsType_5_0, grammarAccess.getExternalAccess().getArgsTypeIDTerminalRuleCall_4_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getExternalRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"argsType",
+							lv_argsType_5_0,
+							"org.eclipse.xtext.common.Terminals.ID");
+					}
+				)
+			)
+		)*
+		otherlv_6=')'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getExternalAccess().getRightParenthesisKeyword_5());
+		}
+	)
 ;
 
 // Entry rule entryRuleMathExp
@@ -435,6 +569,15 @@ rulePrimary returns [EObject current=null]
 			$current = $this_Let_3.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getPrimaryAccess().getExternalUseParserRuleCall_4());
+		}
+		this_ExternalUse_4=ruleExternalUse
+		{
+			$current = $this_ExternalUse_4.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -454,21 +597,130 @@ ruleParenthesis returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='('
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getParenthesisAccess().getParenthesisAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='('
 		{
-			newLeafNode(otherlv_0, grammarAccess.getParenthesisAccess().getLeftParenthesisKeyword_0());
+			newLeafNode(otherlv_1, grammarAccess.getParenthesisAccess().getLeftParenthesisKeyword_1());
 		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getParenthesisAccess().getInnerExpParserRuleCall_2_0());
+				}
+				lv_inner_2_0=ruleExp
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getParenthesisRule());
+					}
+					set(
+						$current,
+						"inner",
+						lv_inner_2_0,
+						"dk.sdu.mmmi.mdsd.Math.Exp");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		otherlv_3=')'
 		{
-			newCompositeNode(grammarAccess.getParenthesisAccess().getExpParserRuleCall_1());
+			newLeafNode(otherlv_3, grammarAccess.getParenthesisAccess().getRightParenthesisKeyword_3());
 		}
-		this_Exp_1=ruleExp
+	)
+;
+
+// Entry rule entryRuleExternalUse
+entryRuleExternalUse returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getExternalUseRule()); }
+	iv_ruleExternalUse=ruleExternalUse
+	{ $current=$iv_ruleExternalUse.current; }
+	EOF;
+
+// Rule ExternalUse
+ruleExternalUse returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getExternalUseAccess().getExternalUseAction_0(),
+					$current);
+			}
+		)
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getExternalUseRule());
+					}
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getExternalUseAccess().getRefExternalCrossReference_1_0());
+				}
+			)
+		)
+		otherlv_2='('
 		{
-			$current = $this_Exp_1.current;
-			afterParserOrEnumRuleCall();
+			newLeafNode(otherlv_2, grammarAccess.getExternalUseAccess().getLeftParenthesisKeyword_2());
 		}
-		otherlv_2=')'
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getExternalUseAccess().getParametersExpParserRuleCall_3_0());
+				}
+				lv_parameters_3_0=ruleExp
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getExternalUseRule());
+					}
+					add(
+						$current,
+						"parameters",
+						lv_parameters_3_0,
+						"dk.sdu.mmmi.mdsd.Math.Exp");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			otherlv_4=','
+			{
+				newLeafNode(otherlv_4, grammarAccess.getExternalUseAccess().getCommaKeyword_4_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getExternalUseAccess().getParametersExpParserRuleCall_4_1_0());
+					}
+					lv_parameters_5_0=ruleExp
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getExternalUseRule());
+						}
+						add(
+							$current,
+							"parameters",
+							lv_parameters_5_0,
+							"dk.sdu.mmmi.mdsd.Math.Exp");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
+		otherlv_6=')'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getParenthesisAccess().getRightParenthesisKeyword_2());
+			newLeafNode(otherlv_6, grammarAccess.getExternalUseAccess().getRightParenthesisKeyword_5());
 		}
 	)
 ;

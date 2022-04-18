@@ -7,10 +7,13 @@ import dk.sdu.mmmi.mdsd.math.Addition;
 import dk.sdu.mmmi.mdsd.math.Assignment;
 import dk.sdu.mmmi.mdsd.math.Division;
 import dk.sdu.mmmi.mdsd.math.Expression;
+import dk.sdu.mmmi.mdsd.math.External;
+import dk.sdu.mmmi.mdsd.math.ExternalUse;
 import dk.sdu.mmmi.mdsd.math.Let;
 import dk.sdu.mmmi.mdsd.math.MathExp;
 import dk.sdu.mmmi.mdsd.math.MathPackage;
 import dk.sdu.mmmi.mdsd.math.Multiplication;
+import dk.sdu.mmmi.mdsd.math.Parenthesis;
 import dk.sdu.mmmi.mdsd.math.Subtraction;
 import dk.sdu.mmmi.mdsd.math.VarUse;
 
@@ -89,6 +92,13 @@ public class MathSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MathPackage.EXTERNAL:
+      {
+        External external = (External)theEObject;
+        T result = caseExternal(external);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MathPackage.MATH_EXP:
       {
         MathExp mathExp = (MathExp)theEObject;
@@ -150,6 +160,22 @@ public class MathSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MathPackage.PARENTHESIS:
+      {
+        Parenthesis parenthesis = (Parenthesis)theEObject;
+        T result = caseParenthesis(parenthesis);
+        if (result == null) result = caseExpression(parenthesis);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MathPackage.EXTERNAL_USE:
+      {
+        ExternalUse externalUse = (ExternalUse)theEObject;
+        T result = caseExternalUse(externalUse);
+        if (result == null) result = caseExpression(externalUse);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MathPackage.NUMBER:
       {
         dk.sdu.mmmi.mdsd.math.Number number = (dk.sdu.mmmi.mdsd.math.Number)theEObject;
@@ -182,6 +208,22 @@ public class MathSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMath(dk.sdu.mmmi.mdsd.math.Math object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>External</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>External</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExternal(External object)
   {
     return null;
   }
@@ -310,6 +352,38 @@ public class MathSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMultiplication(Multiplication object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parenthesis</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parenthesis</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParenthesis(Parenthesis object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>External Use</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>External Use</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExternalUse(ExternalUse object)
   {
     return null;
   }

@@ -7,10 +7,13 @@ import dk.sdu.mmmi.mdsd.math.Addition;
 import dk.sdu.mmmi.mdsd.math.Assignment;
 import dk.sdu.mmmi.mdsd.math.Division;
 import dk.sdu.mmmi.mdsd.math.Expression;
+import dk.sdu.mmmi.mdsd.math.External;
+import dk.sdu.mmmi.mdsd.math.ExternalUse;
 import dk.sdu.mmmi.mdsd.math.Let;
 import dk.sdu.mmmi.mdsd.math.MathExp;
 import dk.sdu.mmmi.mdsd.math.MathPackage;
 import dk.sdu.mmmi.mdsd.math.Multiplication;
+import dk.sdu.mmmi.mdsd.math.Parenthesis;
 import dk.sdu.mmmi.mdsd.math.Subtraction;
 import dk.sdu.mmmi.mdsd.math.VarUse;
 
@@ -90,6 +93,11 @@ public class MathAdapterFactory extends AdapterFactoryImpl
         return createMathAdapter();
       }
       @Override
+      public Adapter caseExternal(External object)
+      {
+        return createExternalAdapter();
+      }
+      @Override
       public Adapter caseMathExp(MathExp object)
       {
         return createMathExpAdapter();
@@ -128,6 +136,16 @@ public class MathAdapterFactory extends AdapterFactoryImpl
       public Adapter caseMultiplication(Multiplication object)
       {
         return createMultiplicationAdapter();
+      }
+      @Override
+      public Adapter caseParenthesis(Parenthesis object)
+      {
+        return createParenthesisAdapter();
+      }
+      @Override
+      public Adapter caseExternalUse(ExternalUse object)
+      {
+        return createExternalUseAdapter();
       }
       @Override
       public Adapter caseNumber(dk.sdu.mmmi.mdsd.math.Number object)
@@ -172,6 +190,21 @@ public class MathAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMathAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link dk.sdu.mmmi.mdsd.math.External <em>External</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see dk.sdu.mmmi.mdsd.math.External
+   * @generated
+   */
+  public Adapter createExternalAdapter()
   {
     return null;
   }
@@ -292,6 +325,36 @@ public class MathAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMultiplicationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link dk.sdu.mmmi.mdsd.math.Parenthesis <em>Parenthesis</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see dk.sdu.mmmi.mdsd.math.Parenthesis
+   * @generated
+   */
+  public Adapter createParenthesisAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link dk.sdu.mmmi.mdsd.math.ExternalUse <em>External Use</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see dk.sdu.mmmi.mdsd.math.ExternalUse
+   * @generated
+   */
+  public Adapter createExternalUseAdapter()
   {
     return null;
   }

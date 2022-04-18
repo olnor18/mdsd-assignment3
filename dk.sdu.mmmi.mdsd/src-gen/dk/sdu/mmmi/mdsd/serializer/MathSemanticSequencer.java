@@ -7,10 +7,13 @@ import com.google.inject.Inject;
 import dk.sdu.mmmi.mdsd.math.Addition;
 import dk.sdu.mmmi.mdsd.math.Assignment;
 import dk.sdu.mmmi.mdsd.math.Division;
+import dk.sdu.mmmi.mdsd.math.External;
+import dk.sdu.mmmi.mdsd.math.ExternalUse;
 import dk.sdu.mmmi.mdsd.math.Let;
 import dk.sdu.mmmi.mdsd.math.MathExp;
 import dk.sdu.mmmi.mdsd.math.MathPackage;
 import dk.sdu.mmmi.mdsd.math.Multiplication;
+import dk.sdu.mmmi.mdsd.math.Parenthesis;
 import dk.sdu.mmmi.mdsd.math.Subtraction;
 import dk.sdu.mmmi.mdsd.math.VarUse;
 import dk.sdu.mmmi.mdsd.services.MathGrammarAccess;
@@ -48,6 +51,12 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case MathPackage.DIVISION:
 				sequence_DivMultExp(context, (Division) semanticObject); 
 				return; 
+			case MathPackage.EXTERNAL:
+				sequence_External(context, (External) semanticObject); 
+				return; 
+			case MathPackage.EXTERNAL_USE:
+				sequence_ExternalUse(context, (ExternalUse) semanticObject); 
+				return; 
 			case MathPackage.LET:
 				sequence_Let(context, (Let) semanticObject); 
 				return; 
@@ -62,6 +71,9 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case MathPackage.NUMBER:
 				sequence_Number(context, (dk.sdu.mmmi.mdsd.math.Number) semanticObject); 
+				return; 
+			case MathPackage.PARENTHESIS:
+				sequence_Parenthesis(context, (Parenthesis) semanticObject); 
 				return; 
 			case MathPackage.SUBTRACTION:
 				sequence_SubAddExp(context, (Subtraction) semanticObject); 
@@ -104,8 +116,6 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     DivMultExp returns Division
 	 *     DivMultExp.Division_1_0_0_1 returns Division
 	 *     DivMultExp.Multiplication_1_0_1_1 returns Division
-	 *     Primary returns Division
-	 *     Parenthesis returns Division
 	 *
 	 * Constraint:
 	 *     (left=DivMultExp_Division_1_0_0_1 right=Primary)
@@ -133,8 +143,6 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     DivMultExp returns Multiplication
 	 *     DivMultExp.Division_1_0_0_1 returns Multiplication
 	 *     DivMultExp.Multiplication_1_0_1_1 returns Multiplication
-	 *     Primary returns Multiplication
-	 *     Parenthesis returns Multiplication
 	 *
 	 * Constraint:
 	 *     (left=DivMultExp_Multiplication_1_0_1_1 right=Primary)
@@ -155,6 +163,38 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     Exp returns ExternalUse
+	 *     SubAddExp returns ExternalUse
+	 *     SubAddExp.Subtraction_1_0_0_1 returns ExternalUse
+	 *     SubAddExp.Addition_1_0_1_1 returns ExternalUse
+	 *     DivMultExp returns ExternalUse
+	 *     DivMultExp.Division_1_0_0_1 returns ExternalUse
+	 *     DivMultExp.Multiplication_1_0_1_1 returns ExternalUse
+	 *     Primary returns ExternalUse
+	 *     ExternalUse returns ExternalUse
+	 *
+	 * Constraint:
+	 *     (ref=[External|ID] parameters+=Exp? parameters+=Exp*)
+	 */
+	protected void sequence_ExternalUse(ISerializationContext context, ExternalUse semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     External returns External
+	 *
+	 * Constraint:
+	 *     (name=ID argsType+=ID? argsType+=ID*)
+	 */
+	protected void sequence_External(ISerializationContext context, External semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Exp returns Let
 	 *     SubAddExp returns Let
 	 *     SubAddExp.Subtraction_1_0_0_1 returns Let
@@ -163,7 +203,6 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     DivMultExp.Division_1_0_0_1 returns Let
 	 *     DivMultExp.Multiplication_1_0_1_1 returns Let
 	 *     Primary returns Let
-	 *     Parenthesis returns Let
 	 *     Let returns Let
 	 *
 	 * Constraint:
@@ -206,7 +245,7 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Math returns Math
 	 *
 	 * Constraint:
-	 *     lines+=MathExp+
+	 *     (name=ID externals+=External* lines+=MathExp+)
 	 */
 	protected void sequence_Math(ISerializationContext context, dk.sdu.mmmi.mdsd.math.Math semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -223,7 +262,6 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     DivMultExp.Division_1_0_0_1 returns Number
 	 *     DivMultExp.Multiplication_1_0_1_1 returns Number
 	 *     Primary returns Number
-	 *     Parenthesis returns Number
 	 *     Number returns Number
 	 *
 	 * Constraint:
@@ -242,15 +280,36 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	
 	/**
 	 * Contexts:
+	 *     Exp returns Parenthesis
+	 *     SubAddExp returns Parenthesis
+	 *     SubAddExp.Subtraction_1_0_0_1 returns Parenthesis
+	 *     SubAddExp.Addition_1_0_1_1 returns Parenthesis
+	 *     DivMultExp returns Parenthesis
+	 *     DivMultExp.Division_1_0_0_1 returns Parenthesis
+	 *     DivMultExp.Multiplication_1_0_1_1 returns Parenthesis
+	 *     Primary returns Parenthesis
+	 *     Parenthesis returns Parenthesis
+	 *
+	 * Constraint:
+	 *     inner=Exp
+	 */
+	protected void sequence_Parenthesis(ISerializationContext context, Parenthesis semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MathPackage.Literals.PARENTHESIS__INNER) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MathPackage.Literals.PARENTHESIS__INNER));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getParenthesisAccess().getInnerExpParserRuleCall_2_0(), semanticObject.getInner());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Exp returns Addition
 	 *     SubAddExp returns Addition
 	 *     SubAddExp.Subtraction_1_0_0_1 returns Addition
 	 *     SubAddExp.Addition_1_0_1_1 returns Addition
-	 *     DivMultExp returns Addition
-	 *     DivMultExp.Division_1_0_0_1 returns Addition
-	 *     DivMultExp.Multiplication_1_0_1_1 returns Addition
-	 *     Primary returns Addition
-	 *     Parenthesis returns Addition
 	 *
 	 * Constraint:
 	 *     (left=SubAddExp_Addition_1_0_1_1 right=DivMultExp)
@@ -275,11 +334,6 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     SubAddExp returns Subtraction
 	 *     SubAddExp.Subtraction_1_0_0_1 returns Subtraction
 	 *     SubAddExp.Addition_1_0_1_1 returns Subtraction
-	 *     DivMultExp returns Subtraction
-	 *     DivMultExp.Division_1_0_0_1 returns Subtraction
-	 *     DivMultExp.Multiplication_1_0_1_1 returns Subtraction
-	 *     Primary returns Subtraction
-	 *     Parenthesis returns Subtraction
 	 *
 	 * Constraint:
 	 *     (left=SubAddExp_Subtraction_1_0_0_1 right=DivMultExp)
@@ -308,7 +362,6 @@ public class MathSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     DivMultExp.Division_1_0_0_1 returns VarUse
 	 *     DivMultExp.Multiplication_1_0_1_1 returns VarUse
 	 *     Primary returns VarUse
-	 *     Parenthesis returns VarUse
 	 *     VariableUse returns VarUse
 	 *
 	 * Constraint:

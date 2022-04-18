@@ -3,11 +3,13 @@
  */
 package dk.sdu.mmmi.mdsd.math.impl;
 
+import dk.sdu.mmmi.mdsd.math.External;
 import dk.sdu.mmmi.mdsd.math.MathExp;
 import dk.sdu.mmmi.mdsd.math.MathPackage;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -28,6 +31,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link dk.sdu.mmmi.mdsd.math.impl.MathImpl#getName <em>Name</em>}</li>
+ *   <li>{@link dk.sdu.mmmi.mdsd.math.impl.MathImpl#getExternals <em>Externals</em>}</li>
  *   <li>{@link dk.sdu.mmmi.mdsd.math.impl.MathImpl#getLines <em>Lines</em>}</li>
  * </ul>
  *
@@ -35,6 +40,36 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class MathImpl extends MinimalEObjectImpl.Container implements dk.sdu.mmmi.mdsd.math.Math
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getExternals() <em>Externals</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExternals()
+   * @generated
+   * @ordered
+   */
+  protected EList<External> externals;
+
   /**
    * The cached value of the '{@link #getLines() <em>Lines</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -72,6 +107,46 @@ public class MathImpl extends MinimalEObjectImpl.Container implements dk.sdu.mmm
    * @generated
    */
   @Override
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MathPackage.MATH__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<External> getExternals()
+  {
+    if (externals == null)
+    {
+      externals = new EObjectContainmentEList<External>(External.class, this, MathPackage.MATH__EXTERNALS);
+    }
+    return externals;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<MathExp> getLines()
   {
     if (lines == null)
@@ -91,6 +166,8 @@ public class MathImpl extends MinimalEObjectImpl.Container implements dk.sdu.mmm
   {
     switch (featureID)
     {
+      case MathPackage.MATH__EXTERNALS:
+        return ((InternalEList<?>)getExternals()).basicRemove(otherEnd, msgs);
       case MathPackage.MATH__LINES:
         return ((InternalEList<?>)getLines()).basicRemove(otherEnd, msgs);
     }
@@ -107,6 +184,10 @@ public class MathImpl extends MinimalEObjectImpl.Container implements dk.sdu.mmm
   {
     switch (featureID)
     {
+      case MathPackage.MATH__NAME:
+        return getName();
+      case MathPackage.MATH__EXTERNALS:
+        return getExternals();
       case MathPackage.MATH__LINES:
         return getLines();
     }
@@ -124,6 +205,13 @@ public class MathImpl extends MinimalEObjectImpl.Container implements dk.sdu.mmm
   {
     switch (featureID)
     {
+      case MathPackage.MATH__NAME:
+        setName((String)newValue);
+        return;
+      case MathPackage.MATH__EXTERNALS:
+        getExternals().clear();
+        getExternals().addAll((Collection<? extends External>)newValue);
+        return;
       case MathPackage.MATH__LINES:
         getLines().clear();
         getLines().addAll((Collection<? extends MathExp>)newValue);
@@ -142,6 +230,12 @@ public class MathImpl extends MinimalEObjectImpl.Container implements dk.sdu.mmm
   {
     switch (featureID)
     {
+      case MathPackage.MATH__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case MathPackage.MATH__EXTERNALS:
+        getExternals().clear();
+        return;
       case MathPackage.MATH__LINES:
         getLines().clear();
         return;
@@ -159,10 +253,31 @@ public class MathImpl extends MinimalEObjectImpl.Container implements dk.sdu.mmm
   {
     switch (featureID)
     {
+      case MathPackage.MATH__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case MathPackage.MATH__EXTERNALS:
+        return externals != null && !externals.isEmpty();
       case MathPackage.MATH__LINES:
         return lines != null && !lines.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //MathImpl

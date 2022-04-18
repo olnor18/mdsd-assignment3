@@ -3,6 +3,7 @@
  */
 package dk.sdu.mmmi.mdsd.scoping;
 
+import com.google.common.base.Objects;
 import dk.sdu.mmmi.mdsd.math.Assignment;
 import dk.sdu.mmmi.mdsd.math.Let;
 import dk.sdu.mmmi.mdsd.math.MathExp;
@@ -40,24 +41,47 @@ public class MathScopeProvider extends AbstractMathScopeProvider {
         return Boolean.valueOf((_eContainer != _containerOfType));
       };
       final List<Assignment> validCandidates = IterableExtensions.<Assignment>toList(IterableExtensions.<Assignment>filter(IterableExtensions.<Assignment>filter(candidates, _function), _function_1));
-      final Let let = EcoreUtil2.<Let>getContainerOfType(context, Let.class);
+      Let let = EcoreUtil2.<Let>getContainerOfType(context, Let.class);
+      if (((let != null) && (IterableExtensions.<VarUse>toList(IterableExtensions.<VarUse>filter(EcoreUtil2.<VarUse>getAllContentsOfType(let.getValue().getExp(), VarUse.class), ((Function1<VarUse, Boolean>) (VarUse varuse) -> {
+        return Boolean.valueOf((varuse == context));
+      }))).size() > 0))) {
+        let = EcoreUtil2.<Let>getContainerOfType(let.eContainer(), Let.class);
+      }
       if ((let != null)) {
-        this.addLets(validCandidates, let, candidates);
+        this.addLets(validCandidates, context, let, candidates);
       }
       return Scopes.scopeFor(validCandidates);
     }
     return scope;
   }
   
-  public void addLets(final List<Assignment> validCandidates, final Let let, final List<Assignment> candidates) {
+  public void addLets(final List<Assignment> validCandidates, final EObject context, final Let let, final List<Assignment> candidates) {
     final Function1<Assignment, Boolean> _function = (Assignment a) -> {
-      EObject _eContainer = a.eContainer();
-      return Boolean.valueOf((_eContainer == let));
+      return Boolean.valueOf(((a.getName() == let.getValue().getName()) && (a.eContainer() instanceof Let)));
     };
-    validCandidates.add(IterableExtensions.<Assignment>findFirst(candidates, _function));
+    int _size = IterableExtensions.size(IterableExtensions.<Assignment>filter(validCandidates, _function));
+    boolean _equals = (_size == 0);
+    if (_equals) {
+      final Function1<Assignment, Boolean> _function_1 = (Assignment a) -> {
+        EObject _eContainer = a.eContainer();
+        return Boolean.valueOf((_eContainer == let));
+      };
+      validCandidates.add(IterableExtensions.<Assignment>findFirst(candidates, _function_1));
+      final Function1<Assignment, Boolean> _function_2 = (Assignment a) -> {
+        EObject _eContainer = a.eContainer();
+        return Boolean.valueOf((_eContainer instanceof MathExp));
+      };
+      final Function1<Assignment, Boolean> _function_3 = (Assignment a) -> {
+        String _name = a.getName();
+        String _name_1 = let.getValue().getName();
+        return Boolean.valueOf(Objects.equal(_name, _name_1));
+      };
+      final Assignment shadowedMathExp = IterableExtensions.<Assignment>findFirst(IterableExtensions.<Assignment>filter(validCandidates, _function_2), _function_3);
+      validCandidates.remove(shadowedMathExp);
+    }
     final Let newLet = EcoreUtil2.<Let>getContainerOfType(let.eContainer(), Let.class);
     if ((newLet != null)) {
-      this.addLets(validCandidates, newLet, candidates);
+      this.addLets(validCandidates, context, newLet, candidates);
     }
   }
 }

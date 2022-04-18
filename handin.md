@@ -1,6 +1,6 @@
-# Assignment 2 | MDSD
+# Assignment 3 | MDSD
 
-I've implemented the calculation logic, with correct handling of PEMDAS, added validation for reasigning "var"s and added scopping/shadowing. I've gotten all tests to pass. I've not implemented hovering.
+I've gotten all tests to pass. I've used my solution for assignment 2 as the base, and due to that faced some issues regarding the scoping and lets. In my solution I hadn't implemented variable shadowing as scoping, due to the tests for that passing, due to the way i handled the interpretation. That meant that i failed a few tests in this assignment until i correctly implemented shadowing.
 
 ## Xtext
 ```xtext

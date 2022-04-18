@@ -7,11 +7,14 @@ import dk.sdu.mmmi.mdsd.math.Addition;
 import dk.sdu.mmmi.mdsd.math.Assignment;
 import dk.sdu.mmmi.mdsd.math.Division;
 import dk.sdu.mmmi.mdsd.math.Expression;
+import dk.sdu.mmmi.mdsd.math.External;
+import dk.sdu.mmmi.mdsd.math.ExternalUse;
 import dk.sdu.mmmi.mdsd.math.Let;
 import dk.sdu.mmmi.mdsd.math.MathExp;
 import dk.sdu.mmmi.mdsd.math.MathFactory;
 import dk.sdu.mmmi.mdsd.math.MathPackage;
 import dk.sdu.mmmi.mdsd.math.Multiplication;
+import dk.sdu.mmmi.mdsd.math.Parenthesis;
 import dk.sdu.mmmi.mdsd.math.Subtraction;
 import dk.sdu.mmmi.mdsd.math.VarUse;
 
@@ -76,6 +79,7 @@ public class MathFactoryImpl extends EFactoryImpl implements MathFactory
     switch (eClass.getClassifierID())
     {
       case MathPackage.MATH: return createMath();
+      case MathPackage.EXTERNAL: return createExternal();
       case MathPackage.MATH_EXP: return createMathExp();
       case MathPackage.ASSIGNMENT: return createAssignment();
       case MathPackage.EXPRESSION: return createExpression();
@@ -84,6 +88,8 @@ public class MathFactoryImpl extends EFactoryImpl implements MathFactory
       case MathPackage.ADDITION: return createAddition();
       case MathPackage.DIVISION: return createDivision();
       case MathPackage.MULTIPLICATION: return createMultiplication();
+      case MathPackage.PARENTHESIS: return createParenthesis();
+      case MathPackage.EXTERNAL_USE: return createExternalUse();
       case MathPackage.NUMBER: return createNumber();
       case MathPackage.VAR_USE: return createVarUse();
       default:
@@ -101,6 +107,18 @@ public class MathFactoryImpl extends EFactoryImpl implements MathFactory
   {
     MathImpl math = new MathImpl();
     return math;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public External createExternal()
+  {
+    ExternalImpl external = new ExternalImpl();
+    return external;
   }
 
   /**
@@ -197,6 +215,30 @@ public class MathFactoryImpl extends EFactoryImpl implements MathFactory
   {
     MultiplicationImpl multiplication = new MultiplicationImpl();
     return multiplication;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Parenthesis createParenthesis()
+  {
+    ParenthesisImpl parenthesis = new ParenthesisImpl();
+    return parenthesis;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ExternalUse createExternalUse()
+  {
+    ExternalUseImpl externalUse = new ExternalUseImpl();
+    return externalUse;
   }
 
   /**

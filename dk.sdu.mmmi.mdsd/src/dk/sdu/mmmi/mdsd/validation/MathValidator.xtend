@@ -16,7 +16,8 @@ import org.eclipse.xtext.EcoreUtil2
 class MathValidator extends AbstractMathValidator {
 	
 	public static val DUPLICATE_NAME = 'duplicateName'
-
+	public static val INVALID_PARAMETERS = 'invalidParameters'
+	
 	@Check
 	def cannotReasignGlobalVar(MathExp mathexp) {
 		val root = EcoreUtil2.getContainerOfType(mathexp, Math)
@@ -24,6 +25,15 @@ class MathValidator extends AbstractMathValidator {
 			error('Cannot assign global variable with same name', 
 					MathPackage.Literals.MATH_EXP__VALUE,
 					DUPLICATE_NAME)
+		}
+	}
+	
+		@Check
+	def checkParameters(ExternalUse externalUse) {
+		if (externalUse.ref.argsType.size !== externalUse.parameters.size) {
+			error('The parameters does not match the defined external', 
+					MathPackage.Literals.EXTERNAL_USE__PARAMETERS,
+					INVALID_PARAMETERS)
 		}
 	}
 	

@@ -3,8 +3,13 @@ grammar dk.sdu.mmmi.mdsd.Math with org.eclipse.xtext.common.Terminals
 generate math "http://www.sdu.dk/mmmi/mdsd/Math"
 
 Math:
-	lines += MathExp+	
+	"program" name=ID externals+=External* lines += MathExp+	
 ;
+
+External:
+	"external" name=ID "(" argsType+=ID? ("," argsType+=ID)* ")"
+;
+
 
 MathExp:
 	'var' value=Assignment
@@ -28,11 +33,15 @@ DivMultExp returns Expression:
 ;
 
 Primary returns Expression:
-	Number | Parenthesis | VariableUse | Let
+	Number | Parenthesis | VariableUse | Let | ExternalUse
 ;
 
 Parenthesis returns Expression:
-	'(' Exp ')'
+	{Parenthesis} '(' inner=Exp ')'
+;
+
+ExternalUse returns Expression:
+	{ExternalUse} ref = [External] "(" parameters+=Exp? ("," parameters+=Exp)* ")"
 ;
 
 Number returns Expression:

@@ -7,7 +7,13 @@
   <genPackages prefix="Math" basePackage="dk.sdu.mmmi.mdsd" disposableProviderFactory="true"
       fileExtensions="math" ecorePackage="Math.ecore#/">
     <genClasses ecoreClass="Math.ecore#//Math">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Math.ecore#//Math/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//Math/externals"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//Math/lines"/>
+    </genClasses>
+    <genClasses ecoreClass="Math.ecore#//External">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Math.ecore#//External/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Math.ecore#//External/argsType"/>
     </genClasses>
     <genClasses ecoreClass="Math.ecore#//MathExp">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//MathExp/value"/>
@@ -36,6 +42,13 @@
     <genClasses ecoreClass="Math.ecore#//Multiplication">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//Multiplication/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//Multiplication/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Math.ecore#//Parenthesis">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//Parenthesis/inner"/>
+    </genClasses>
+    <genClasses ecoreClass="Math.ecore#//ExternalUse">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Math.ecore#//ExternalUse/ref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Math.ecore#//ExternalUse/parameters"/>
     </genClasses>
     <genClasses ecoreClass="Math.ecore#//Number">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Math.ecore#//Number/value"/>
